@@ -10,6 +10,10 @@ pool:
   mypool
 
 steps:
+- task: MavenAuthenticate@0
+  inputs:
+    artifactsFeeds: xinwenliu
+    
 - task: Maven@3
   inputs:
     mavenPomFile: 'pom.xml'
