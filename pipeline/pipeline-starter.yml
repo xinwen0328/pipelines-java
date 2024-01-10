@@ -3,6 +3,10 @@
 # Add steps that analyze code, save build artifacts, deploy, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/java
 
+parameters:
+  - name: RunBash
+    type: boolean
+
 trigger:
 - main
 
@@ -26,7 +30,7 @@ steps:
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     goals: 'package'
 
-- {{ if true }}:
+- ${{ if eq(1,1) }}: 
 - task: Bash@3
   displayName: RunBash
   inputs:
