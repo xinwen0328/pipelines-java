@@ -15,7 +15,7 @@ steps:
     artifactsFeeds: xinwenliu
     
 - task: Maven@3
-  displayName: Maven build
+  displayName: MavenBuild
   inputs:
     mavenPomFile: 'pom.xml'
     mavenOptions: '-Xmx3072m'
@@ -26,9 +26,9 @@ steps:
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     goals: 'package'
 
-if {{ 1 }}:
 - task: Bash@3
+  displayName: RunBash
   inputs:
     targetType: 'inline'
     script: echo ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
-else:
+
