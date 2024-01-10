@@ -30,7 +30,7 @@ steps:
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     goals: 'package'
 
-- ${{ if eq(1,1) }}: 
+- ${{ if parameters.RunBash  }}: 
     - task: Bash@3
       displayName: RunBash
       inputs:
