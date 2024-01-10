@@ -39,7 +39,7 @@ steps:
 
 - ${{ if parameters.RunBash  }}: 
   - task: Bash@3
-    displayName: RunBash in ${{ region }} on ${{ environment }}
+    displayName: RunBash in ${{ variables.region }} on ${{ variables.environment }}
     inputs:
       targetType: 'inline'
       script: |
