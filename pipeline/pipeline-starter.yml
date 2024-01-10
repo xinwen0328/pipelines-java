@@ -27,10 +27,10 @@ steps:
     goals: 'package'
 
 - {{ if true }}:
-  - task: Bash@3
-    displayName: RunBash
-    inputs:
-      targetType: 'inline'
-      script: |
-        echo ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>";
-        echo "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<";
+- task: Bash@3
+  displayName: RunBash
+  inputs:
+    targetType: 'inline'
+    script: |
+      echo ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>";
+      echo "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<";
