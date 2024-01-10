@@ -9,8 +9,8 @@ parameters:
     type: boolean
     default: true
 
-trigger:
-- main
+#trigger:
+#- main
 
 pool:
   mypool
