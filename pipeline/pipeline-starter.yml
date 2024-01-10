@@ -44,5 +44,5 @@ steps:
       targetType: 'inline'
       script: |
         echo ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>";
-        echo $PWD $HOSTNAME
+        echo $PWD $HOSTNAME ${{ variables.region }}
         echo "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<";
