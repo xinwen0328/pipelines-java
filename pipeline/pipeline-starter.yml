@@ -11,6 +11,8 @@ parameters:
 
 variables:
   - template: variables/variables.yml
+    parameters:
+      env: prd
 
 trigger:
 - main
