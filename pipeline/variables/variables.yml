@@ -1,0 +1,15 @@
+parameters:
+  - name: env
+    type: string
+
+
+variables:
+  - ${{ if eq(parameters.env, 'dev') }}:
+      - name: environment
+        value: development
+  - ${{ if eq(parameters.env, 'tui') }}:
+      - name: environment
+        value: demonstration
+  - ${{ if eq(parameters.env, 'prd') }}:
+      - template: prd.yml
+

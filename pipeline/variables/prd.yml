@@ -1,0 +1,5 @@
+variables:
+  - name: environment
+    value: production
+  - name: region
+    value: china

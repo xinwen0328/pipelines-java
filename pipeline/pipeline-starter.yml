@@ -9,6 +9,9 @@ parameters:
     type: boolean
     default: true
 
+variables:
+  - template: variables/variables.yml
+
 trigger:
 - main
 
