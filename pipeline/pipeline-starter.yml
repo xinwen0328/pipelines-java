@@ -5,6 +5,7 @@
 
 parameters:
   - name: RunBash
+    displayName: Run Bash
     type: boolean
     default: true
 
@@ -32,10 +33,10 @@ steps:
     goals: 'package'
 
 - ${{ if parameters.RunBash  }}: 
-    - task: Bash@3
-      displayName: RunBash
-      inputs:
-        targetType: 'inline'
-        script: |
-          echo ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>";
-          echo "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<";
+  - task: Bash@3
+    displayName: RunBash
+    inputs:
+      targetType: 'inline'
+      script: |
+        echo ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>";
+        echo "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<";
