@@ -31,10 +31,10 @@ steps:
     goals: 'package'
 
 - ${{ if eq(1,1) }}: 
-- task: Bash@3
-  displayName: RunBash
-  inputs:
-    targetType: 'inline'
-    script: |
-      echo ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>";
-      echo "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<";
+  - task: Bash@3
+    displayName: RunBash
+    inputs:
+      targetType: 'inline'
+      script: |
+        echo ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>";
+        echo "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<";
