@@ -26,9 +26,13 @@ steps:
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     goals: 'package'
 
-- task: Bash@3
-  displayName: RunBash
-  inputs:
-    targetType: 'inline'
-    script: echo ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
+- {{ if true }}:
+  - task: Bash@3
+    displayName: RunBash
+    inputs:
+      targetType: 'inline'
+      script: |
+      echo ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>";
+      echo "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<";
+
 
