@@ -6,6 +6,7 @@
 parameters:
   - name: RunBash
     type: boolean
+    default: true
 
 trigger:
 - main
