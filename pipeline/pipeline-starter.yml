@@ -99,6 +99,7 @@ steps:
       displayName: 'terraform plan'
       inputs:
         command: plan
+        workingDirectory: pipeline/template/iac
         providerServiceAws: my-aws-connection
         providerAwsRegion: us-east-2
 
@@ -107,5 +108,6 @@ steps:
       displayName: 'terraform apply'
       inputs:
         command: apply
+        workingDirectory: pipeline/template/iac
         providerServiceAws: my-aws-connection
         providerAwsRegion: us-east-2
