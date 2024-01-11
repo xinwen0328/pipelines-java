@@ -11,18 +11,19 @@ parameters:
   - name: installTerraform
     displayName: install Terraform
     type: boolean
-    default: false
+    default: true
   - name: initTerraform
     displayName: init Terraform
     type: boolean
+    default: true
 
 variables:
   - template: variables/variables.yml
     parameters:
       env: prd
 
-trigger:
-- main
+#trigger:
+#- main
 
 pool:
   mypool
