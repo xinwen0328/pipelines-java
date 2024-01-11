@@ -88,11 +88,11 @@ steps:
       # service connection name, required if backendType = aws
       backendServiceAws: my-aws-connection
       # s3 bucket's region, optional if provided elsewhere (i.e. inside terraform template or command options)
-      backendAwsRegion: us-east-2
+      # backendAwsRegion: us-east-2
       # s3 bucket name, optional if provided elsewhere (i.e. inside terraform template or command options)
-      backendAwsBucket: mysuppertfbackend
+      # backendAwsBucket: mysuppertfbackend
       # s3 path to state file, optional if provided elsewhere (i.e. inside terraform template or command options)
-      backendAwsKey: mysuppertfbackend/dev-infrax
+      # backendAwsKey: mysuppertfbackend/dev-infrax
 
 - ${{ if parameters.planTerraform }}:
     - task: TerraformCLI@0
@@ -102,8 +102,6 @@ steps:
         workingDirectory: pipeline/template/iac
         providerServiceAws: my-aws-connection
         providerAwsRegion: us-east-2
-        backendAwsBucket: mysuppertfbackend
-        backendAwsKey: mysuppertfbackend/dev-infrax
 
 - ${{ if parameters.applyTerraform }}:
     - task: TerraformCLI@0
@@ -112,5 +110,3 @@ steps:
         command: apply
         workingDirectory: pipeline/template/iac
         providerServiceAws: my-aws-connection
-        providerAwsRegion: us-east-2
-        backendAwsKey: mysuppertfbackend/dev-infrax
