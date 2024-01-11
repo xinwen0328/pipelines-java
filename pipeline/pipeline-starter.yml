@@ -58,17 +58,17 @@ steps:
 
 - ${{ if parameters.initTerraform }}:
   - task: TerraformCLI@0
-  displayName: 'terraform init'
-  inputs:
-    command: init
-    workingDirectory: template/iac
-    # set to `aws` to use aws backend
-    backendType: aws
-    # service connection name, required if backendType = aws
-    backendServiceAws: my-aws-connection
-    # s3 bucket's region, optional if provided elsewhere (i.e. inside terraform template or command options)
-    backendAwsRegion: us-east-2
-    # s3 bucket name, optional if provided elsewhere (i.e. inside terraform template or command options)
-    backendAwsBucket: mysuppertfbackend
-    # s3 path to state file, optional if provided elsewhere (i.e. inside terraform template or command options)
-    backendAwsKey: 'mysuppertfbackend/dev-infrax'
+    displayName: 'terraform init'
+    inputs:
+      command: init
+      workingDirectory: template/iac
+      # set to `aws` to use aws backend
+      backendType: aws
+      # service connection name, required if backendType = aws
+      backendServiceAws: my-aws-connection
+      # s3 bucket's region, optional if provided elsewhere (i.e. inside terraform template or command options)
+      backendAwsRegion: us-east-2
+      # s3 bucket name, optional if provided elsewhere (i.e. inside terraform template or command options)
+      backendAwsBucket: mysuppertfbackend
+      # s3 path to state file, optional if provided elsewhere (i.e. inside terraform template or command options)
+      backendAwsKey: 'mysuppertfbackend/dev-infrax'
