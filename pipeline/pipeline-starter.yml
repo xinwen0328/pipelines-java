@@ -20,6 +20,14 @@ parameters:
     displayName: init Terraform
     type: boolean
     default: false
+  - name: planTerraform
+    displayName: plan Terraform
+    type: boolean
+    default: false
+  - name: applyTerraform
+    displayName: apply Terraform
+    type: boolean
+    default: false
 
 variables:
   - template: variables/variables.yml
@@ -85,3 +93,17 @@ steps:
       backendAwsBucket: mysuppertfbackend
       # s3 path to state file, optional if provided elsewhere (i.e. inside terraform template or command options)
       backendAwsKey: 'mysuppertfbackend/dev-infrax'
+
+- ${{ if parameters.planTerraform }}:
+    - task: TerraformCLI@0
+      displayName: 'terraform plan'
+      inputs:
+        command: plan
+        environmentServiceName: my-aws-connection
+
+- ${{ if parameters.applyTerraform }}:
+    - task: TerraformCLI@0
+      displayName: 'terraform apply'
+      inputs:
+        command: apply
+        environmentServiceName: my-aws-connection
