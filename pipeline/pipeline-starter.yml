@@ -4,10 +4,14 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/java
 
 parameters:
-  - name: RunBash
-    displayName: Run Bash
+  - name: runBash
+    displayName: show Title
     type: boolean
     default: true
+  - name: mavenBuild
+    displayName: maven Build
+    type: boolean
+    default: false
   - name: installTerraform
     displayName: install Terraform
     type: boolean
@@ -32,28 +36,32 @@ steps:
 - task: MavenAuthenticate@0
   inputs:
     artifactsFeeds: xinwenliu
-    
-- task: Maven@3
-  displayName: MavenBuild
-  inputs:
-    mavenPomFile: 'pom.xml'
-    mavenOptions: '-Xmx3072m'
-    javaHomeOption: 'JDKVersion'
-    jdkVersionOption: '1.8'
-    jdkArchitectureOption: 'x64'
-    publishJUnitResults: true
-    testResultsFiles: '**/surefire-reports/TEST-*.xml'
-    goals: 'package'
 
-- ${{ if parameters.RunBash  }}: 
-  - task: Bash@3
-    displayName: RunBash in ${{ variables.region }} on ${{ variables.environment }}
+- ${{ if parameters.runBash  }}:
+    - task: Bash@3
+      displayName: Run Pipeline in ${{ variables.region }} on ${{ variables.environment }}
+      inputs:
+        targetType: 'inline'
+        script: |
+          echo ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>";
+          echo "I'm in " ${{ variables.region }}
+          echo "My build agent is" $HOSTNAME
+          echo "My Path is" $PWD 
+          echo "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<";
+
+- ${{ if parameters.mavenBuild }}:
+  - task: Maven@3
+    displayName: MavenBuild
     inputs:
-      targetType: 'inline'
-      script: |
-        echo ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>";
-        echo $PWD $HOSTNAME ${{ variables.region }}
-        echo "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<";
+      mavenPomFile: 'pom.xml'
+      mavenOptions: '-Xmx3072m'
+      javaHomeOption: 'JDKVersion'
+      jdkVersionOption: '1.8'
+      jdkArchitectureOption: 'x64'
+      publishJUnitResults: true
+      testResultsFiles: '**/surefire-reports/TEST-*.xml'
+      goals: 'package'
+
 
 - ${{ if parameters.installTerraform }}:
   - task: TerraformInstaller@1
