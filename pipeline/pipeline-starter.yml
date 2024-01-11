@@ -22,8 +22,8 @@ variables:
     parameters:
       env: prd
 
-#trigger:
-#- main
+trigger:
+- main
 
 pool:
   mypool
