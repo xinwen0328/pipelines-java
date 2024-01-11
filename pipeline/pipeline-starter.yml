@@ -54,7 +54,7 @@ steps:
         echo $PWD $HOSTNAME ${{ variables.region }}
         echo "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<";
 
-- ${{ parameters.installTerraform }}:
+- ${{ not(parameters.installTerraform) }}:
   - task: TerraformInstaller@1
     displayName: install terraform
     inputs:
