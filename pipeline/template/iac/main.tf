@@ -2,12 +2,6 @@ provider "aws" {
   region = "us-east-2"
 }
 
-backend "s3" {
-  bucket = "mysuppertfbackend"
-  key    = "mysuppertfbackend/dev-infrax"
-  region = "us-east-2"
-}
-
 resource "aws_vpc" "my_vpc" {
   cidr_block = "10.0.0.0/16" # 根据你的需求选择合适的CIDR块
 

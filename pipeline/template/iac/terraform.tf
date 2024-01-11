@@ -7,4 +7,9 @@ terraform {
   }
   required_version = "~> 1.2"
 
+  backend "s3" {
+    bucket = "mysuppertfbackend"
+    key    = "mysuppertfbackend/dev-infrax"
+    region = "us-east-2"
+  }
 }
