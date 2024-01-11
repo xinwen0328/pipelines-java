@@ -110,3 +110,4 @@ steps:
         command: apply
         workingDirectory: pipeline/template/iac
         providerServiceAws: my-aws-connection
+        providerAwsRegion: us-east-2
