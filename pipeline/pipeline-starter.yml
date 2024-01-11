@@ -28,6 +28,10 @@ parameters:
     displayName: apply Terraform
     type: boolean
     default: false
+  - name: destroyTerraform
+    displayName: Destroy Terraform
+    type: boolean
+    default: false
 
 variables:
   - template: variables/variables.yml
@@ -108,6 +112,14 @@ steps:
       displayName: 'terraform apply'
       inputs:
         command: apply
+        workingDirectory: pipeline/template/iac
+        providerServiceAws: my-aws-connection
+        providerAwsRegion: us-east-2
+- ${{ if parameters.destroyTerraform }}:
+    - task: TerraformCLI@0
+      displayName: 'terraform destroy'
+      inputs:
+        command: destroy
         workingDirectory: pipeline/template/iac
         providerServiceAws: my-aws-connection
         providerAwsRegion: us-east-2
