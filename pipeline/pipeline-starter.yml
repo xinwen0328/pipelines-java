@@ -8,6 +8,10 @@ parameters:
     displayName: Run Bash
     type: boolean
     default: true
+  - name: installTerraform
+    displayName: install Terraform
+    type: boolean
+    default: false
   - name: initTerraform
     displayName: init Terraform
     type: boolean
@@ -51,10 +55,11 @@ steps:
         echo $PWD $HOSTNAME ${{ variables.region }}
         echo "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<";
 
-- task: TerraformInstaller@1
-  displayName: install terraform
-  inputs:
-    terraformVersion: latest
+if ${{ parameters.installTerraform }}:
+  - task: TerraformInstaller@1
+    displayName: install terraform
+    inputs:
+      terraformVersion: latest
 
 - ${{ if parameters.initTerraform }}:
   - task: TerraformCLI@0
