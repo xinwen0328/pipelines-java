@@ -33,10 +33,6 @@ pool:
   mypool
 
 steps:
-- task: MavenAuthenticate@0
-  inputs:
-    artifactsFeeds: xinwenliu
-
 - ${{ if parameters.runBash  }}:
     - task: Bash@3
       displayName: Run Pipeline in ${{ variables.region }} on ${{ variables.environment }}
@@ -61,6 +57,10 @@ steps:
       publishJUnitResults: true
       testResultsFiles: '**/surefire-reports/TEST-*.xml'
       goals: 'package'
+
+  - task: MavenAuthenticate@0
+    inputs:
+      artifactsFeeds: xinwenliu
 
 
 - ${{ if parameters.installTerraform }}:
