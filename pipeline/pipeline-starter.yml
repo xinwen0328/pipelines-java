@@ -11,11 +11,11 @@ parameters:
   - name: installTerraform
     displayName: install Terraform
     type: boolean
-    default: true
+    default: false
   - name: initTerraform
     displayName: init Terraform
     type: boolean
-    default: true
+    default: false
 
 variables:
   - template: variables/variables.yml
@@ -55,7 +55,7 @@ steps:
         echo $PWD $HOSTNAME ${{ variables.region }}
         echo "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<";
 
-- ${{ not(parameters.installTerraform) }}:
+- ${{ if parameters.installTerraform }}:
   - task: TerraformInstaller@1
     displayName: install terraform
     inputs:
