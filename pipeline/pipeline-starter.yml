@@ -46,3 +46,8 @@ steps:
         echo ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>";
         echo $PWD $HOSTNAME ${{ variables.region }}
         echo "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<";
+
+- task: TerraformInstaller@1
+  displayName: install terraform
+  inputs:
+    terraformVersion: latest
