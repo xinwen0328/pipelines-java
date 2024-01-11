@@ -99,11 +99,13 @@ steps:
       displayName: 'terraform plan'
       inputs:
         command: plan
-        environmentServiceName: my-aws-connection
+        providerServiceAws: my-aws-connection
+        providerAwsRegion: us-east-2
 
 - ${{ if parameters.applyTerraform }}:
     - task: TerraformCLI@0
       displayName: 'terraform apply'
       inputs:
         command: apply
-        environmentServiceName: my-aws-connection
+        providerServiceAws: my-aws-connection
+        providerAwsRegion: us-east-2
