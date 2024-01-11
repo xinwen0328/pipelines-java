@@ -92,7 +92,7 @@ steps:
       # s3 bucket name, optional if provided elsewhere (i.e. inside terraform template or command options)
       backendAwsBucket: mysuppertfbackend
       # s3 path to state file, optional if provided elsewhere (i.e. inside terraform template or command options)
-      backendAwsKey: 'mysuppertfbackend/dev-infrax'
+      backendAwsKey: mysuppertfbackend/dev-infrax
 
 - ${{ if parameters.planTerraform }}:
     - task: TerraformCLI@0
@@ -102,6 +102,8 @@ steps:
         workingDirectory: pipeline/template/iac
         providerServiceAws: my-aws-connection
         providerAwsRegion: us-east-2
+        backendAwsBucket: mysuppertfbackend
+        backendAwsKey: mysuppertfbackend/dev-infrax
 
 - ${{ if parameters.applyTerraform }}:
     - task: TerraformCLI@0
@@ -111,3 +113,4 @@ steps:
         workingDirectory: pipeline/template/iac
         providerServiceAws: my-aws-connection
         providerAwsRegion: us-east-2
+        backendAwsKey: mysuppertfbackend/dev-infrax
