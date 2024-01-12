@@ -23,7 +23,7 @@ parameters:
     type: string
 
 variables:
-  - template: pipeline/variables/variables.yml
+  - template: /pipeline/variables/variables.yml
     parameters:
       env: prd
 
