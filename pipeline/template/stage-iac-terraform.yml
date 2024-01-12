@@ -44,7 +44,7 @@ jobs:
               # set to `aws` to use aws backend
               backendType: aws
               # service connection name, required if backendType = aws
-              backendServiceAws: ${{ parameters.serviceconnection }}
+              backendServiceAws: ${{ parameters.backendServiceAws }}
               # s3 bucket's region, optional if provided elsewhere (i.e. inside terraform template or command options)
               # backendAwsRegion: us-east-2
               # s3 bucket name, optional if provided elsewhere (i.e. inside terraform template or command options)
@@ -58,8 +58,8 @@ jobs:
             inputs:
               command: plan
               workingDirectory: ${{ parameters.workingDirectory }}
-              providerServiceAws: ${{ parameters.serviceconnection }}
-              providerAwsRegion: ${{ parameters.cloudregion }}
+              providerServiceAws: ${{ parameters.backendServiceAws }}
+              providerAwsRegion: ${{ parameters.providerAwsRegion }}
 
       - ${{ if parameters.applyTerraform }}:
           - task: TerraformCLI@0
@@ -67,8 +67,8 @@ jobs:
             inputs:
               command: apply
               workingDirectory: ${{ parameters.workingDirectory }}
-              providerServiceAws: ${{ parameters.serviceconnection }}
-              providerAwsRegion: ${{ parameters.cloudregion }}
+              providerServiceAws: ${{ parameters.backendServiceAws }}
+              providerAwsRegion: ${{ parameters.providerAwsRegion }}
 
       - ${{ if parameters.destroyTerraform }}:
           - task: TerraformCLI@0
@@ -76,5 +76,5 @@ jobs:
             inputs:
               command: destroy
               workingDirectory: ${{ parameters.workingDirectory }}
-              providerServiceAws: ${{ parameters.serviceconnection }}
-              providerAwsRegion: ${{ parameters.cloudregion }}
+              providerServiceAws: ${{ parameters.backendServiceAws }}
+              providerAwsRegion: ${{ parameters.providerAwsRegion }}
