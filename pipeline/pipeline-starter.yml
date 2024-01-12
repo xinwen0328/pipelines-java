@@ -39,9 +39,9 @@ pool:
 stages:
   - ${{ if parameters.runBash  }}:
     - stage: Stage1
-      displayName: Stage-1
+      displayName: Stage1
       jobs:
-      - job: Stage1-jobs-job1
+      - job: Stage1jobsjob1
         steps:
           - task: Bash@3
             displayName: Run Pipeline in ${{ variables.region }} on ${{ variables.environment }}
@@ -56,9 +56,9 @@ stages:
 
   - ${{ if parameters.mavenBuild }}:
     - stage: Stage2
-      displayName: Stage-2
+      displayName: Stage2
       jobs:
-        - job: Stage2-jobs-job1
+        - job: Stage2jobsjob1
           steps:
             - task: MavenAuthenticate@0
               inputs:
@@ -78,9 +78,9 @@ stages:
 
   - ${{ if parameters.installTerraform }}:
     - stage: Stage3
-      displayName: Stage-2
+      displayName: Stage2
       jobs:
-        - job: Stage3-jobs-1
+        - job: Stage3jobs1
           steps:
             - task: TerraformInstaller@1
               displayName: install terraform
@@ -89,7 +89,7 @@ stages:
 
   - ${{ if parameters.applyTerraform }}:
     - stage: Stage3
-      displayName: Stage-2
+      displayName: Stage2
       jobs:
         - template: template/stage-iac-apply.yml
           parameters:
@@ -99,7 +99,7 @@ stages:
 
   - ${{ if parameters.destroyTerraform }}:
     - stage: Stage3
-      displayName: Stage-2
+      displayName: Stage2
       jobs:
         - template: template/stage-iac-destroy.yml
           parameters:
