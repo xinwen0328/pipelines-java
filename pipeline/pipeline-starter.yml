@@ -4,7 +4,7 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/java
 
 parameters:
-  - name: runBash
+  - name: showTitle
     displayName: show Title
     type: boolean
     default: true
@@ -14,6 +14,10 @@ parameters:
     default: false
   - name: installTerraform
     displayName: install Terraform
+    type: boolean
+    default: false
+  - name: planTerraform
+    displayName: plan Terraform
     type: boolean
     default: false
   - name: applyTerraform
@@ -37,35 +41,34 @@ pool:
   mypool
 
 stages:
-  - ${{ if parameters.runBash  }}:
-    - stage: Stage1
-      displayName: Stage1
+  - ${{ if parameters.showTitle  }}:
+    - stage: showPipeline
+      displayName: Show Pipeline
       jobs:
-      - job: Stage1jobsjob1
+      - job: ShowPipelineInfo
+        displayName: PipeLineInfo
         steps:
           - task: Bash@3
-            displayName: Run Pipeline in ${{ variables.region }} on ${{ variables.environment }}
+            displayName: Run Pipeline on ${{ variables.environment }} from ${{ variables.region }}
             inputs:
               targetType: 'inline'
               script: |
                 echo ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>";
-                echo "I'm in " ${{ variables.region }}
-                echo "My build agent is" $HOSTNAME
-                echo "My Path is" $PWD 
+                echo "I'm running pipeline from "${PWD}"on "${HOSTNAME}" from "${{ variables.region }}
                 echo "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<";
 
   - ${{ if parameters.mavenBuild }}:
-    - stage: Stage2
-      displayName: Stage2
+    - stage: mavenBuild
+      displayName: Maven Build
       jobs:
-        - job: Stage2jobsjob1
+        - job: mavenBuildJob
+          displayName: Maven Build Job
           steps:
             - task: MavenAuthenticate@0
               inputs:
                 artifactsFeeds: xinwenliu
 
             - task: Maven@3
-              displayName: MavenBuild
               inputs:
                 mavenPomFile: 'pom.xml'
                 mavenOptions: '-Xmx3072m'
@@ -77,35 +80,52 @@ stages:
                 goals: 'package'
 
   - ${{ if parameters.installTerraform }}:
-    - stage: Stage3
-      displayName: Stage2
+    - stage: InstallTerraform
+      displayName: Install Terraform
       jobs:
-        - job: Stage3jobs1
-          steps:
-            - task: TerraformInstaller@1
-              displayName: install terraform
-              inputs:
-                terraformVersion: latest
+        - template: template/stage-iac-terraform.yml
+          parameters:
+            installTerraform: true
+            initTerraform: false
+            planTerraform: false
+            applyTerraform: false
+            destroyTerraform: false
+
+  - ${{ if parameters.planTerraform }}:
+      - stage: planTerraform
+        displayName: Plan Terraform
+        jobs:
+          - template: template/stage-iac-terraform.yml
+            parameters:
+              installTerraform: false
+              initTerraform: true
+              planTerraform: true
+              applyTerraform: false
+              destroyTerraform: false
 
   - ${{ if parameters.applyTerraform }}:
     - stage: Stage3
       displayName: Stage2
       jobs:
-        - template: template/stage-iac-apply.yml
+        - template: template/stage-iac-terraform.yml
           parameters:
+            installTerraform: false
             initTerraform: true
             planTerraform: true
             applyTerraform: true
+            destroyTerraform: false
 
   - ${{ if parameters.destroyTerraform }}:
     - stage: Stage3
       displayName: Stage2
       jobs:
-        - template: template/stage-iac-destroy.yml
+        - template: template/stage-iac-terraform.yml
           parameters:
+            installTerraform: false
             initTerraform: true
-            planTerraform: true
-            applyTerraform: true
+            planTerraform: false
+            applyTerraform: false
+            destroyTerraform: true
 
 
 

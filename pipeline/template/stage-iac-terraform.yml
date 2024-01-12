@@ -1,4 +1,8 @@
 parameters:
+  - name: installTerraform
+    displayName: install Terraform
+    type: boolean
+    default: false
   - name: initTerraform
     displayName: init Terraform
     type: boolean
@@ -11,10 +15,19 @@ parameters:
     displayName: apply Terraform
     type: boolean
     default: false
+  - name: destroyTerraform
+    displayName: Destroy Terraform
+    type: boolean
+    default: false
 
 jobs:
   - job:
     steps:
+      - ${{ if parameters.installTerraform }}:
+          - task: TerraformInstaller@1
+            inputs:
+              terraformVersion: latest
+
       - ${{ if parameters.initTerraform }}:
           - task: TerraformCLI@0
             displayName: 'terraform init'
@@ -46,6 +59,15 @@ jobs:
             displayName: 'terraform apply'
             inputs:
               command: apply
+              workingDirectory: pipeline/template/iac
+              providerServiceAws: my-aws-connection
+              providerAwsRegion: us-east-2
+
+      - ${{ if parameters.destroyTerraform }}:
+          - task: TerraformCLI@0
+            displayName: 'terraform destroy'
+            inputs:
+              command: destroy
               workingDirectory: pipeline/template/iac
               providerServiceAws: my-aws-connection
               providerAwsRegion: us-east-2
