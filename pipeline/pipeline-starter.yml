@@ -7,7 +7,7 @@ parameters:
   - name: showTitle
     displayName: show Title
     type: boolean
-    default: false
+    default: true
   - name: mavenBuild
     displayName: maven Build
     type: boolean
@@ -34,8 +34,8 @@ variables:
     parameters:
       env: prd
 
-#trigger:
-#- main
+trigger:
+  - main
 
 pool:
   mypool
