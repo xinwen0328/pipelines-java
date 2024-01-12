@@ -105,6 +105,7 @@ stages:
             workingDirectory: ${{ variables.defaultWorkingDirectory }}
             backendServiceAws: ${{ variables.serviceconnection }}
             providerAwsRegion: ${{ variables.cloudregion }}
+            myModule: module.subnet
 
   - ${{ if parameters.planTerraform }}:
       - stage: planTerraform
@@ -120,6 +121,7 @@ stages:
               workingDirectory: ${{ variables.defaultWorkingDirectory }}
               backendServiceAws: ${{ variables.serviceconnection }}
               providerAwsRegion: ${{ variables.cloudregion }}
+              myModule: module.subnet
 
   - ${{ if parameters.applyTerraform }}:
     - stage: applyTerraform
@@ -135,6 +137,7 @@ stages:
             workingDirectory: ${{ variables.defaultWorkingDirectory }}
             backendServiceAws: ${{ variables.serviceconnection }}
             providerAwsRegion: ${{ variables.cloudregion }}
+            myModule: module.subnet
 
   - ${{ if parameters.destroyTerraform }}:
     - stage: destroyTerraform
@@ -150,6 +153,7 @@ stages:
             workingDirectory: ${{ variables.defaultWorkingDirectory }}
             backendServiceAws: ${{ variables.serviceconnection }}
             providerAwsRegion: ${{ variables.cloudregion }}
+            myModule: module.subnet
 
 
 
