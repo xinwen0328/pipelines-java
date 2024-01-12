@@ -37,21 +37,33 @@ pool:
   mypool
 
 stages:
-  - jobs:
-    - steps:
-        - ${{ if parameters.runBash  }}:
-            - task: Bash@3
-              displayName: Run Pipeline in ${{ variables.region }} on ${{ variables.environment }}
-              inputs:
-                targetType: 'inline'
-                script: |
-                  echo ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>";
-                  echo "I'm in " ${{ variables.region }}
-                  echo "My build agent is" $HOSTNAME
-                  echo "My Path is" $PWD 
-                  echo "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<";
+  - ${{ if parameters.runBash  }}:
+    - stage: Stage1
+      displayName: Stage-1
+      jobs:
+      - job: Stage1-jobs-job1
+        steps:
+          - task: Bash@3
+            displayName: Run Pipeline in ${{ variables.region }} on ${{ variables.environment }}
+            inputs:
+              targetType: 'inline'
+              script: |
+                echo ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>";
+                echo "I'm in " ${{ variables.region }}
+                echo "My build agent is" $HOSTNAME
+                echo "My Path is" $PWD 
+                echo "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<";
 
-        - ${{ if parameters.mavenBuild }}:
+  - ${{ if parameters.mavenBuild }}:
+    - stage: Stage2
+      displayName: Stage-2
+      jobs:
+        - job: Stage2-jobs-job1
+          steps:
+            - task: MavenAuthenticate@0
+              inputs:
+              artifactsFeeds: xinwenliu
+
             - task: Maven@3
               displayName: MavenBuild
               inputs:
@@ -64,29 +76,36 @@ stages:
                 testResultsFiles: '**/surefire-reports/TEST-*.xml'
                 goals: 'package'
 
-            - task: MavenAuthenticate@0
-              inputs:
-                artifactsFeeds: xinwenliu
-
-        - ${{ if parameters.installTerraform }}:
+  - ${{ if parameters.installTerraform }}:
+    - stage: Stage3
+      displayName: Stage-2
+      jobs:
+        - job: Stage3-jobs-1
+          steps:
             - task: TerraformInstaller@1
               displayName: install terraform
               inputs:
                 terraformVersion: latest
 
   - ${{ parameters.applyTerraform }}:
-      - template: iac/stage-iac-apply.yml
-        parameters:
-          initTerraform: true
-          planTerraform: true
-          applyTerraform: true
+    - stage: Stage3
+      displayName: Stage-2
+      jobs:
+        - template: iac/stage-iac-apply.yml
+          parameters:
+            initTerraform: true
+            planTerraform: true
+            applyTerraform: true
 
   - ${{ parameters.destroyTerraform }}:
-      - template: iac/stage-iac-destroy.yml
-        parameters:
-          initTerraform: true
-          planTerraform: true
-          applyTerraform: true
+    - stage: Stage3
+      displayName: Stage-2
+      jobs:
+        - template: iac/stage-iac-destroy.yml
+          parameters:
+            initTerraform: true
+            planTerraform: true
+            applyTerraform: true
 
 
 
