@@ -62,7 +62,7 @@ stages:
           steps:
             - task: MavenAuthenticate@0
               inputs:
-              artifactsFeeds: xinwenliu
+                artifactsFeeds: xinwenliu
 
             - task: Maven@3
               displayName: MavenBuild
