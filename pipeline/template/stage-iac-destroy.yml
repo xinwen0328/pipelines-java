@@ -15,7 +15,6 @@ parameters:
 jobs:
   - job:
     steps:
-      - step:
         - ${{ if parameters.initTerraform }}:
             - task: TerraformCLI@0
               displayName: 'terraform init'
