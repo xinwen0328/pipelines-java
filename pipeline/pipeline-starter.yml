@@ -121,7 +121,7 @@ stages:
               workingDirectory: ${{ variables.defaultWorkingDirectory }}
               backendServiceAws: ${{ variables.serviceconnection }}
               providerAwsRegion: ${{ variables.cloudregion }}
-              myModule: module.subnet
+              myModule: module
 
   - ${{ if parameters.applyTerraform }}:
     - stage: applyTerraform
