@@ -45,8 +45,20 @@ stages:
     - stage: showPipeline
       displayName: Show Pipeline
       jobs:
-      - job: ShowPipelineInfo
-        displayName: PipeLineInfo
+      - job: ShowPipelineInfo1
+        displayName: PipeLineInfo1
+        steps:
+          - task: Bash@3
+            displayName: Run Pipeline on ${{ variables.environment }} from ${{ variables.region }}
+            inputs:
+              targetType: 'inline'
+              script: |
+                echo ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>";
+                echo "I'm running pipeline from "${PWD}" on "${HOSTNAME}" for "${{ variables.region }}
+                echo "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<";
+
+      - job: ShowPipelineInfo2
+        displayName: PipeLineInfo2
         steps:
           - task: Bash@3
             displayName: Run Pipeline on ${{ variables.environment }} from ${{ variables.region }}
@@ -61,16 +73,13 @@ stages:
     - stage: mavenBuild
       displayName: Maven Build
       jobs:
-        - job: MavenAuthenticate
-          displayName: Maven Authenticate Job
+        - job: mavenJob
+          displayName: Maven Job
           steps:
             - task: MavenAuthenticate@0
               inputs:
                 artifactsFeeds: xinwenliu
 
-        - job: MavenBuild
-          displayName: Maven Build Job
-          steps:
             - task: Maven@3
               inputs:
                 mavenPomFile: 'pom.xml'
