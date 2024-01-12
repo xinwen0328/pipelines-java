@@ -107,8 +107,8 @@ stages:
               destroyTerraform: false
 
   - ${{ if parameters.applyTerraform }}:
-    - stage: Stage3
-      displayName: Stage2
+    - stage: applyTerraform
+      displayName: Apply Terraform
       jobs:
         - template: template/stage-iac-terraform.yml
           parameters:
@@ -119,8 +119,8 @@ stages:
             destroyTerraform: false
 
   - ${{ if parameters.destroyTerraform }}:
-    - stage: Stage3
-      displayName: Stage2
+    - stage: destroyTerraform
+      displayName: Destroy Terraform
       jobs:
         - template: template/stage-iac-terraform.yml
           parameters:
