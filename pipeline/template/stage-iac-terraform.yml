@@ -19,6 +19,8 @@ parameters:
     displayName: Destroy Terraform
     type: boolean
     default: false
+  - name: workingDirectory
+    type: string
 
 jobs:
   - job:
@@ -34,7 +36,7 @@ jobs:
             displayName: 'terraform init'
             inputs:
               command: init
-              workingDirectory: ${{ parameters.defaultWorkingDirectory }}
+              workingDirectory: ${{ parameters.workingDirectory }}
               # set to `aws` to use aws backend
               backendType: aws
               # service connection name, required if backendType = aws
@@ -51,7 +53,7 @@ jobs:
             displayName: 'terraform plan'
             inputs:
               command: plan
-              workingDirectory: ${{ parameters.defaultWorkingDirectory }}
+              workingDirectory: ${{ parameters.workingDirectory }}
               providerServiceAws: ${{ variables.serviceconnection }}
               providerAwsRegion: ${{ variables.cloudregion }}
 
@@ -60,7 +62,7 @@ jobs:
             displayName: 'terraform apply'
             inputs:
               command: apply
-              workingDirectory: ${{ parameters.defaultWorkingDirectory }}
+              workingDirectory: ${{ parameters.workingDirectory }}
               providerServiceAws: ${{ variables.serviceconnection }}
               providerAwsRegion: ${{ variables.cloudregion }}
 
@@ -69,6 +71,6 @@ jobs:
             displayName: 'terraform destroy'
             inputs:
               command: destroy
-              workingDirectory: ${{ parameters.defaultWorkingDirectory }}
+              workingDirectory: ${{ parameters.workingDirectory }}
               providerServiceAws: ${{ variables.serviceconnection }}
               providerAwsRegion: ${{ variables.cloudregion }}
