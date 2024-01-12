@@ -22,11 +22,6 @@ parameters:
   - name: workingDirectory
     type: string
 
-variables:
-  - template: /pipeline/variables/variables.yml
-    parameters:
-      env: prd
-
 jobs:
   - job:
     displayName: Terraform Action
