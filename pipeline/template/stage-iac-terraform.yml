@@ -22,7 +22,7 @@ parameters:
 
 jobs:
   - job:
-    displayName: Terraform int/plan/apply/destroy
+    displayName: Terraform Action
     steps:
       - ${{ if parameters.installTerraform }}:
           - task: TerraformInstaller@1
