@@ -28,6 +28,10 @@ parameters:
     displayName: Destroy Terraform
     type: boolean
     default: false
+  - name: module
+    displayName: My Module
+    type: string
+    default: module
 
 variables:
   - template: /pipeline/variables/variables.yml
@@ -105,7 +109,7 @@ stages:
             workingDirectory: ${{ variables.defaultWorkingDirectory }}
             backendServiceAws: ${{ variables.serviceconnection }}
             providerAwsRegion: ${{ variables.cloudregion }}
-            myModule: module.subnet
+            myModule: ${{ parameters.module }}
 
   - ${{ if parameters.planTerraform }}:
       - stage: planTerraform
@@ -121,7 +125,7 @@ stages:
               workingDirectory: ${{ variables.defaultWorkingDirectory }}
               backendServiceAws: ${{ variables.serviceconnection }}
               providerAwsRegion: ${{ variables.cloudregion }}
-              myModule: module
+              myModule: ${{ parameters.module }}
 
   - ${{ if parameters.applyTerraform }}:
     - stage: applyTerraform
@@ -137,7 +141,7 @@ stages:
             workingDirectory: ${{ variables.defaultWorkingDirectory }}
             backendServiceAws: ${{ variables.serviceconnection }}
             providerAwsRegion: ${{ variables.cloudregion }}
-            myModule: module.subnet
+            myModule: ${{ parameters.module }}
 
   - ${{ if parameters.destroyTerraform }}:
     - stage: destroyTerraform
@@ -153,7 +157,7 @@ stages:
             workingDirectory: ${{ variables.defaultWorkingDirectory }}
             backendServiceAws: ${{ variables.serviceconnection }}
             providerAwsRegion: ${{ variables.cloudregion }}
-            myModule: module.subnet
+            myModule: ${{ parameters.module }}
 
 
 
