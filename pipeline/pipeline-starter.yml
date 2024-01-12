@@ -91,7 +91,7 @@ stages:
     - stage: Stage3
       displayName: Stage-2
       jobs:
-        - template: iac/stage-iac-apply.yml
+        - template: template/stage-iac-apply.yml
           parameters:
             initTerraform: true
             planTerraform: true
@@ -101,7 +101,7 @@ stages:
     - stage: Stage3
       displayName: Stage-2
       jobs:
-        - template: iac/stage-iac-destroy.yml
+        - template: template/stage-iac-destroy.yml
           parameters:
             initTerraform: true
             planTerraform: true

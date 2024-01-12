@@ -38,7 +38,7 @@ jobs:
             displayName: 'terraform plan'
             inputs:
               command: plan
-              workingDirectory: pipeline/template
+              workingDirectory: pipeline/template/iac
               providerServiceAws: my-aws-connection
               providerAwsRegion: us-east-2
 
@@ -47,6 +47,6 @@ jobs:
             displayName: 'terraform apply'
             inputs:
               command: apply
-              workingDirectory: pipeline/template
+              workingDirectory: pipeline/template/iac
               providerServiceAws: my-aws-connection
               providerAwsRegion: us-east-2
