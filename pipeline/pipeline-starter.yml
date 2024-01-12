@@ -30,7 +30,7 @@ parameters:
     default: false
 
 variables:
-  - template: variables/variables.yml
+  - template: pipeline/variables/variables.yml
     parameters:
       env: prd
 
