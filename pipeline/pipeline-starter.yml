@@ -103,6 +103,8 @@ stages:
             applyTerraform: false
             destroyTerraform: false
             workingDirectory: ${{ variables.defaultWorkingDirectory }}
+            backendServiceAws: ${{ variables.serviceconnection }}
+            providerAwsRegion: ${{ variables.cloudregion }}
 
   - ${{ if parameters.planTerraform }}:
       - stage: planTerraform
@@ -116,6 +118,8 @@ stages:
               applyTerraform: false
               destroyTerraform: false
               workingDirectory: ${{ variables.defaultWorkingDirectory }}
+              backendServiceAws: ${{ variables.serviceconnection }}
+              providerAwsRegion: ${{ variables.cloudregion }}
 
   - ${{ if parameters.applyTerraform }}:
     - stage: applyTerraform
@@ -129,6 +133,8 @@ stages:
             applyTerraform: true
             destroyTerraform: false
             workingDirectory: ${{ variables.defaultWorkingDirectory }}
+            backendServiceAws: ${{ variables.serviceconnection }}
+            providerAwsRegion: ${{ variables.cloudregion }}
 
   - ${{ if parameters.destroyTerraform }}:
     - stage: destroyTerraform
@@ -142,6 +148,8 @@ stages:
             applyTerraform: false
             destroyTerraform: true
             workingDirectory: ${{ variables.defaultWorkingDirectory }}
+            backendServiceAws: ${{ variables.serviceconnection }}
+            providerAwsRegion: ${{ variables.cloudregion }}
 
 
 

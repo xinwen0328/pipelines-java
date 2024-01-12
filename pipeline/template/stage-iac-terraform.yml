@@ -21,6 +21,10 @@ parameters:
     default: false
   - name: workingDirectory
     type: string
+  - name: backendServiceAws
+    type: string
+  - name: providerAwsRegion
+    type: string
 
 jobs:
   - job:
@@ -40,7 +44,7 @@ jobs:
               # set to `aws` to use aws backend
               backendType: aws
               # service connection name, required if backendType = aws
-              backendServiceAws: ${{ variables.serviceconnection }}
+              backendServiceAws: ${{ parameters.serviceconnection }}
               # s3 bucket's region, optional if provided elsewhere (i.e. inside terraform template or command options)
               # backendAwsRegion: us-east-2
               # s3 bucket name, optional if provided elsewhere (i.e. inside terraform template or command options)
@@ -54,8 +58,8 @@ jobs:
             inputs:
               command: plan
               workingDirectory: ${{ parameters.workingDirectory }}
-              providerServiceAws: ${{ variables.serviceconnection }}
-              providerAwsRegion: ${{ variables.cloudregion }}
+              providerServiceAws: ${{ parameters.serviceconnection }}
+              providerAwsRegion: ${{ parameters.cloudregion }}
 
       - ${{ if parameters.applyTerraform }}:
           - task: TerraformCLI@0
@@ -63,8 +67,8 @@ jobs:
             inputs:
               command: apply
               workingDirectory: ${{ parameters.workingDirectory }}
-              providerServiceAws: ${{ variables.serviceconnection }}
-              providerAwsRegion: ${{ variables.cloudregion }}
+              providerServiceAws: ${{ parameters.serviceconnection }}
+              providerAwsRegion: ${{ parameters.cloudregion }}
 
       - ${{ if parameters.destroyTerraform }}:
           - task: TerraformCLI@0
@@ -72,5 +76,5 @@ jobs:
             inputs:
               command: destroy
               workingDirectory: ${{ parameters.workingDirectory }}
-              providerServiceAws: ${{ variables.serviceconnection }}
-              providerAwsRegion: ${{ variables.cloudregion }}
+              providerServiceAws: ${{ parameters.serviceconnection }}
+              providerAwsRegion: ${{ parameters.cloudregion }}
