@@ -34,8 +34,8 @@ variables:
     parameters:
       env: prd
 
-trigger:
-- main
+#trigger:
+#- main
 
 pool:
   mypool
@@ -54,7 +54,7 @@ stages:
               targetType: 'inline'
               script: |
                 echo ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>";
-                echo "I'm running pipeline from "${PWD}"on "${HOSTNAME}" from "${{ variables.region }}
+                echo "I'm running pipeline from "${PWD}" on "${HOSTNAME}" for "${{ variables.region }}
                 echo "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<";
 
   - ${{ if parameters.mavenBuild }}:
