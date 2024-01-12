@@ -102,6 +102,7 @@ stages:
             planTerraform: false
             applyTerraform: false
             destroyTerraform: false
+            workingDirectory: ${{ parameters.workingDirectory }}
 
   - ${{ if parameters.planTerraform }}:
       - stage: planTerraform
@@ -114,6 +115,7 @@ stages:
               planTerraform: true
               applyTerraform: false
               destroyTerraform: false
+              workingDirectory: ${{ parameters.workingDirectory }}
 
   - ${{ if parameters.applyTerraform }}:
     - stage: applyTerraform
@@ -126,6 +128,7 @@ stages:
             planTerraform: true
             applyTerraform: true
             destroyTerraform: false
+            workingDirectory: ${{ parameters.workingDirectory }}
 
   - ${{ if parameters.destroyTerraform }}:
     - stage: destroyTerraform
@@ -138,6 +141,7 @@ stages:
             planTerraform: false
             applyTerraform: false
             destroyTerraform: true
+            workingDirectory: ${{ parameters.workingDirectory }}
 
 
 

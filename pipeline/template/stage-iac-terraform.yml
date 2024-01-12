@@ -34,11 +34,11 @@ jobs:
             displayName: 'terraform init'
             inputs:
               command: init
-              workingDirectory: pipeline/template/iac
+              workingDirectory: ${{ parameters.defaultWorkingDirectory }}
               # set to `aws` to use aws backend
               backendType: aws
               # service connection name, required if backendType = aws
-              backendServiceAws: my-aws-connection
+              backendServiceAws: ${{ variables.serviceconnection }}
               # s3 bucket's region, optional if provided elsewhere (i.e. inside terraform template or command options)
               # backendAwsRegion: us-east-2
               # s3 bucket name, optional if provided elsewhere (i.e. inside terraform template or command options)
@@ -51,24 +51,24 @@ jobs:
             displayName: 'terraform plan'
             inputs:
               command: plan
-              workingDirectory: pipeline/template/iac
-              providerServiceAws: my-aws-connection
-              providerAwsRegion: us-east-2
+              workingDirectory: ${{ parameters.defaultWorkingDirectory }}
+              providerServiceAws: ${{ variables.serviceconnection }}
+              providerAwsRegion: ${{ variables.cloudregion }}
 
       - ${{ if parameters.applyTerraform }}:
           - task: TerraformCLI@0
             displayName: 'terraform apply'
             inputs:
               command: apply
-              workingDirectory: pipeline/template/iac
-              providerServiceAws: my-aws-connection
-              providerAwsRegion: us-east-2
+              workingDirectory: ${{ parameters.defaultWorkingDirectory }}
+              providerServiceAws: ${{ variables.serviceconnection }}
+              providerAwsRegion: ${{ variables.cloudregion }}
 
       - ${{ if parameters.destroyTerraform }}:
           - task: TerraformCLI@0
             displayName: 'terraform destroy'
             inputs:
               command: destroy
-              workingDirectory: pipeline/template/iac
-              providerServiceAws: my-aws-connection
-              providerAwsRegion: us-east-2
+              workingDirectory: ${{ parameters.defaultWorkingDirectory }}
+              providerServiceAws: ${{ variables.serviceconnection }}
+              providerAwsRegion: ${{ variables.cloudregion }}

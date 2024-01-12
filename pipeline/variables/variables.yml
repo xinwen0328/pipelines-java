@@ -12,4 +12,9 @@ variables:
         value: demonstration
   - ${{ if eq(parameters.env, 'prd') }}:
       - template: prd.yml
-
+  - name: serviceconnection
+    value: my-aws-connection
+  - name: cloudregion
+    value: us-east-2
+  - name: defaultWorkingDirectory
+    value: pipeline/template/iac
