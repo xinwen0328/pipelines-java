@@ -3,10 +3,10 @@ provider "aws" {
 }
 
 module "vpc" {
-  source  = "vpc"
+  source  = "./vpc"
 }
 
 module "subnet" {
-  source  = "subnet"
+  source  = "./subnet"
 }
 
