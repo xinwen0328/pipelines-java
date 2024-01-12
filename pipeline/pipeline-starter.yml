@@ -61,13 +61,16 @@ stages:
     - stage: mavenBuild
       displayName: Maven Build
       jobs:
-        - job: mavenBuildJob
-          displayName: Maven Build Job
+        - job: MavenAuthenticate
+          displayName: Maven Authenticate Job
           steps:
             - task: MavenAuthenticate@0
               inputs:
                 artifactsFeeds: xinwenliu
 
+        - job: MavenBuild
+          displayName: Maven Build Job
+          steps:
             - task: Maven@3
               inputs:
                 mavenPomFile: 'pom.xml'
