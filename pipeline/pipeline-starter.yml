@@ -28,7 +28,7 @@ parameters:
     displayName: Destroy Terraform
     type: boolean
     default: false
-  - name: module
+  - name: mymodule
     displayName: My Module
     type: string
     default: module
@@ -109,7 +109,7 @@ stages:
             workingDirectory: ${{ variables.defaultWorkingDirectory }}
             backendServiceAws: ${{ variables.serviceconnection }}
             providerAwsRegion: ${{ variables.cloudregion }}
-            myModule: ${{ parameters.module }}
+            myModule: ${{ parameters.mymodule }}
 
   - ${{ if parameters.planTerraform }}:
       - stage: planTerraform
@@ -125,7 +125,7 @@ stages:
               workingDirectory: ${{ variables.defaultWorkingDirectory }}
               backendServiceAws: ${{ variables.serviceconnection }}
               providerAwsRegion: ${{ variables.cloudregion }}
-              myModule: ${{ parameters.module }}
+              myModule: ${{ parameters.mymodule }}
 
   - ${{ if parameters.applyTerraform }}:
     - stage: applyTerraform
@@ -141,7 +141,7 @@ stages:
             workingDirectory: ${{ variables.defaultWorkingDirectory }}
             backendServiceAws: ${{ variables.serviceconnection }}
             providerAwsRegion: ${{ variables.cloudregion }}
-            myModule: ${{ parameters.module }}
+            myModule: ${{ parameters.mymodule }}
 
   - ${{ if parameters.destroyTerraform }}:
     - stage: destroyTerraform
@@ -157,7 +157,7 @@ stages:
             workingDirectory: ${{ variables.defaultWorkingDirectory }}
             backendServiceAws: ${{ variables.serviceconnection }}
             providerAwsRegion: ${{ variables.cloudregion }}
-            myModule: ${{ parameters.module }}
+            myModule: ${{ parameters.mymodule }}
 
 
 
