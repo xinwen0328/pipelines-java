@@ -1,0 +1,50 @@
+parameters:
+  - name: initTerraform
+    displayName: init Terraform
+    type: boolean
+    default: false
+  - name: planTerraform
+    displayName: plan Terraform
+    type: boolean
+    default: false
+  - name: applyTerraform
+    displayName: apply Terraform
+    type: boolean
+    default: false
+
+jobs:
+  - steps:
+    - ${{ if parameters.initTerraform }}:
+        - task: TerraformCLI@0
+          displayName: 'terraform init'
+          inputs:
+            command: init
+            workingDirectory: pipeline/template/iac
+            # set to `aws` to use aws backend
+            backendType: aws
+            # service connection name, required if backendType = aws
+            backendServiceAws: my-aws-connection
+            # s3 bucket's region, optional if provided elsewhere (i.e. inside terraform template or command options)
+            # backendAwsRegion: us-east-2
+            # s3 bucket name, optional if provided elsewhere (i.e. inside terraform template or command options)
+            # backendAwsBucket: mysuppertfbackend
+            # s3 path to state file, optional if provided elsewhere (i.e. inside terraform template or command options)
+            # backendAwsKey: mysuppertfbackend/dev-infrax
+
+    - ${{ if parameters.planTerraform }}:
+        - task: TerraformCLI@0
+          displayName: 'terraform plan'
+          inputs:
+            command: plan
+            workingDirectory: pipeline/template/iac
+            providerServiceAws: my-aws-connection
+            providerAwsRegion: us-east-2
+
+    - ${{ if parameters.applyTerraform }}:
+        - task: TerraformCLI@0
+          displayName: 'terraform apply'
+          inputs:
+            command: apply
+            workingDirectory: pipeline/template/iac
+            providerServiceAws: my-aws-connection
+            providerAwsRegion: us-east-2
