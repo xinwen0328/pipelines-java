@@ -3,5 +3,6 @@ resource "aws_vpc" "my_vpc" {
 
   tags = {
     Name = "my-vpc"
+    NickName = "我的虚拟网络"
   }
 }

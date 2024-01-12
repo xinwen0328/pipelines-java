@@ -6,6 +6,6 @@ resource "aws_subnet" "my_subnet" {
 
   tags = {
     Name = "my-subnet"
-    NickName = "Spider"
+    NickName = "我的子网"
   }
 }
