@@ -62,7 +62,7 @@ jobs:
               workingDirectory: ${{ parameters.workingDirectory }}
               providerServiceAws: ${{ parameters.backendServiceAws }}
               providerAwsRegion: ${{ parameters.providerAwsRegion }}
-              additionalCommandArguments: -target=module.subnet
+              additionalCommandArguments: -target=${{ parameters.myModule }}
 
       - ${{ if parameters.applyTerraform }}:
           - task: TerraformCLI@0
