@@ -30,8 +30,9 @@ parameters:
     default: false
   - name: mymodule
     displayName: My Module
-    type: object
-    default:
+    type: string
+    default: module
+    values:
       - module
       - module.subnet
       - module.vpc
