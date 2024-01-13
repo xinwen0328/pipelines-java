@@ -30,8 +30,11 @@ parameters:
     default: false
   - name: mymodule
     displayName: My Module
-    type: string
-    default: module
+    type: object
+    default:
+      - module
+      - module.subnet
+      - module.vpc
 
 variables:
   - template: /pipeline/variables/variables.yml
