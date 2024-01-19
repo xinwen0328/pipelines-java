@@ -1,0 +1,11 @@
+- hosts: all
+  gather_facts: no
+  become: no
+  roles:
+    - aws_ec2
+  module_defaults:
+    group/aws:
+      aws_access_key: '{{ aws_access_key }}'
+      aws_secret_key: '{{ aws_secret_key }}'
+      region: '{{ region }}'
+  tags: aws

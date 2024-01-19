@@ -1,0 +1,8 @@
+---
+- name: Include Build Agent  tasks
+  include_tasks:
+    file: build_agent.yml
+    apply:
+      tags: build
+  tags: build
+

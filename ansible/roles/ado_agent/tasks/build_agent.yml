@@ -1,0 +1,6 @@
+---
+- name: Install necessary packages
+  apt:  # zu yum ändern
+    name:
+      - ansible
+    state: present

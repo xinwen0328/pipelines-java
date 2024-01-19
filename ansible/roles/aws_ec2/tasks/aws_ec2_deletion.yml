@@ -1,0 +1,6 @@
+---
+
+- name : Termination an EC2 instance with a public IP address
+  amazon.aws.ec2_instance:
+    instance_ids: '{{ aws_instance_id }}'
+    state: absent

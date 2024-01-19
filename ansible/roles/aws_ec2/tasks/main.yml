@@ -1,0 +1,15 @@
+---
+- name: Provision AWS EC2 Instance
+  include_tasks:
+    file: aws_ec2.yml
+    apply:
+      tags: aws_ec2_provision
+  tags: aws_ec2_provision
+
+
+- name: Delete AWS EC2 Instance
+  include_tasks:
+    file: aws_ec2_deletion.yml
+    apply:
+      tags: aws_ec2_deletion
+  tags: aws_ec2_deletion
