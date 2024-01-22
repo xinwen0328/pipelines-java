@@ -1,5 +1,5 @@
 ---
-aws_access_key: "AKIA5VXNSAFOQPTCY3RI"
-aws_secret_key: "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"
+aws_access_key: ""
+aws_secret_key: ""
 region: "us-east-2"
 aws_instance_id: "i-0358082a7d3691d44"
