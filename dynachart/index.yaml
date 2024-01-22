@@ -18,7 +18,7 @@ entries:
       name: luhi-DT
     name: dynatrace-operator
     sources:
-    - https://github.com/Dynatrace/dynatrace-operator
+    - https://github.com/xinwen0328/pipelines-java/tree/main/dynachart
     type: application
     urls:
     - https://github.com/xinwen0328/pipelines-java/blob/main/dynachart/charts/dynatrace-operator-0.15.0.tgz/dynatrace-operator-0.15.0.tgz
