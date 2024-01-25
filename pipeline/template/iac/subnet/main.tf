@@ -6,6 +6,6 @@ resource "aws_subnet" "my_subnet" {
 
   tags = {
     Name = "my-subnet"
-    NickName = var.mytag1
+    NickName = var.stage
   }
 }

@@ -3,6 +3,6 @@ resource "aws_vpc" "my_vpc" {
 
   tags = {
     Name = "my-vpc"
-    NickName = "我的牛13虚拟网络"
+    NickName = var.stage
   }
 }
