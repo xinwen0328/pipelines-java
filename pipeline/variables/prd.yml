@@ -4,4 +4,4 @@ variables:
   - name: region
     value: china
   - name: iac_config_file
-    values: prd.tfvar
+    value: prd.tfvar
