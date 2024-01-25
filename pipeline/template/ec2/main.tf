@@ -4,7 +4,7 @@ provider "aws" {
 
 module "vpc" {
   source  = "./vpc"
-  stage = "var.stage"
+  stage = var.stage
 }
 
 
@@ -12,6 +12,6 @@ module "vpc" {
 module "subnet" {
   source  = "./subnet"
   vpc_id = module.vpc.vpc_id
-  stage = "var.stage"
+  stage = var.stage
 }
 
