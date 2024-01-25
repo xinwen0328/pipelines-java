@@ -6,4 +6,5 @@ variable "vpc_id" {
 variable "mytag1" {
   description = "My Tag #1"
   type        = string
+  default     = var.mytag1_root
 }
