@@ -60,6 +60,7 @@ jobs:
               workingDirectory: ${{ parameters.workingDirectory }}
               providerServiceAws: ${{ parameters.backendServiceAws }}
               providerAwsRegion: ${{ parameters.providerAwsRegion }}
+              commandOptions: '-var secret=${{ mytag1 }}'
 
       - ${{ if parameters.applyTerraform }}:
           - task: TerraformCLI@0

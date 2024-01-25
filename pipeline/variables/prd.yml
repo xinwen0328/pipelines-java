@@ -3,3 +3,5 @@ variables:
     value: production
   - name: region
     value: china
+  - name: mytag1
+    value: 我的牛13子网
