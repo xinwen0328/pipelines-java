@@ -63,8 +63,8 @@ jobs:
               workingDirectory: ${{ parameters.workingDirectory }}
               providerServiceAws: ${{ parameters.backendServiceAws }}
               providerAwsRegion: ${{ parameters.providerAwsRegion }}
-              secureVarsFile: ${{ parameters.iacConfigFile }}
-              # commandOptions: "-var-file=../iac_config/${{ parameters.iacConfigFile }}"
+              #secureVarsFile: ${{ parameters.iacConfigFile }}
+              commandOptions: "-var-file=../iac_config/${{ parameters.iacConfigFile }}"
 
       - ${{ if parameters.applyTerraform }}:
           - task: TerraformCLI@0
@@ -74,8 +74,8 @@ jobs:
               workingDirectory: ${{ parameters.workingDirectory }}
               providerServiceAws: ${{ parameters.backendServiceAws }}
               providerAwsRegion: ${{ parameters.providerAwsRegion }}
-              secureVarsFile: ${{ parameters.iacConfigFile }}
-              #commandOptions: "-var-file=../iac_config/${{ parameters.iacConfigFile }}"
+              #secureVarsFile: ${{ parameters.iacConfigFile }}
+              commandOptions: "-var-file=../iac_config/${{ parameters.iacConfigFile }}"
 
       - ${{ if parameters.destroyTerraform }}:
           - task: TerraformCLI@0
@@ -85,5 +85,5 @@ jobs:
               workingDirectory: ${{ parameters.workingDirectory }}
               providerServiceAws: ${{ parameters.backendServiceAws }}
               providerAwsRegion: ${{ parameters.providerAwsRegion }}
-              secureVarsFile: ${{ parameters.iacConfigFile }}
-              #commandOptions: "-var-file=../iac_config/${{ parameters.iacConfigFile }}"
+              #secureVarsFile: ${{ parameters.iacConfigFile }}
+              commandOptions: "-var-file=../iac_config/${{ parameters.iacConfigFile }}"
