@@ -120,7 +120,7 @@ stages:
               workingDirectory: ${{ variables.defaultWorkingDirectory }}
               backendServiceAws: ${{ variables.serviceconnection }}
               providerAwsRegion: ${{ variables.cloudregion }}
-              mytag1: ${{ variables.mytag1 }}
+              iacConfigFile: ${{ variables.iac_config_file }}
 
   - ${{ if parameters.applyTerraform }}:
     - stage: applyTerraform
@@ -136,6 +136,7 @@ stages:
             workingDirectory: ${{ variables.defaultWorkingDirectory }}
             backendServiceAws: ${{ variables.serviceconnection }}
             providerAwsRegion: ${{ variables.cloudregion }}
+            iacConfigFile: ${{ variables.iac_config_file }}
 
   - ${{ if parameters.destroyTerraform }}:
     - stage: destroyTerraform
@@ -151,6 +152,7 @@ stages:
             workingDirectory: ${{ variables.defaultWorkingDirectory }}
             backendServiceAws: ${{ variables.serviceconnection }}
             providerAwsRegion: ${{ variables.cloudregion }}
+            iacConfigFile: ${{ variables.iac_config_file }}
 
 
 

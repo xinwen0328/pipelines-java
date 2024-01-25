@@ -4,17 +4,17 @@ parameters:
 
 
 variables:
-  - ${{ if eq(parameters.env, 'dev') }}:
-      - name: environment
-        value: development
-  - ${{ if eq(parameters.env, 'tui') }}:
-      - name: environment
-        value: demonstration
-  - ${{ if eq(parameters.env, 'prd') }}:
-      - template: prd.yml
   - name: serviceconnection
     value: my-aws-connection
   - name: cloudregion
     value: us-east-2
   - name: defaultWorkingDirectory
     value: pipeline/template/iac
+  - ${{ if eq(parameters.env, 'dev') }}:
+      - name: environment
+        template: dev.yml
+  - ${{ if eq(parameters.env, 'tui') }}:
+      - name: environment
+        template: tui.yml
+  - ${{ if eq(parameters.env, 'prd') }}:
+      - template: prd.yml

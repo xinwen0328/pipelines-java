@@ -3,7 +3,7 @@ variable "vpc_id" {
   type        = string
 }
 
-variable "mytag1" {
-  description = "My Tag #1"
+variable "stage" {
+  description = "My Stage"
   type        = string
 }

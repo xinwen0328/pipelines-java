@@ -25,7 +25,7 @@ parameters:
     type: string
   - name: providerAwsRegion
     type: string
-  - name: mytag1
+  - name: iacConfigFile
     type: string
 
 
@@ -63,7 +63,7 @@ jobs:
               workingDirectory: ${{ parameters.workingDirectory }}
               providerServiceAws: ${{ parameters.backendServiceAws }}
               providerAwsRegion: ${{ parameters.providerAwsRegion }}
-              commandOptions: "-var mytag1_root=${{ parameters.mytag1 }}"
+              secureVarsFile: ./iac_config/${{ parameters.iacConfigFile }}
 
       - ${{ if parameters.applyTerraform }}:
           - task: TerraformCLI@0
@@ -73,6 +73,7 @@ jobs:
               workingDirectory: ${{ parameters.workingDirectory }}
               providerServiceAws: ${{ parameters.backendServiceAws }}
               providerAwsRegion: ${{ parameters.providerAwsRegion }}
+              secureVarsFile: ./iac_config/${{ parameters.iacConfigFile }}
 
       - ${{ if parameters.destroyTerraform }}:
           - task: TerraformCLI@0
@@ -82,3 +83,4 @@ jobs:
               workingDirectory: ${{ parameters.workingDirectory }}
               providerServiceAws: ${{ parameters.backendServiceAws }}
               providerAwsRegion: ${{ parameters.providerAwsRegion }}
+              secureVarsFile: ./iac_config/${{ parameters.iacConfigFile }}

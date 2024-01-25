@@ -1,7 +1,7 @@
 variables:
   - name: environment
-    value: production
+    value: tui
   - name: region
     value: china
   - name: iac_config_file
-    values: prd.tfvar
+    values: tui.tfvar
