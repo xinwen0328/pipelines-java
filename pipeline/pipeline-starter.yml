@@ -6,10 +6,11 @@
 parameters:
   - name: deployNetwork
     displayName: Deploy Network
+    type: boolean
     default: false
   - name: deployEC2
     displayName: Deploy EC2
-    type: string
+    type: boolean
     default: false
   - name: selectAction
     displayName: Select your action
