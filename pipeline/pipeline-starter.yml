@@ -28,6 +28,12 @@ parameters:
     displayName: Destroy Terraform
     type: boolean
     default: false
+  - Name: InfraComponent
+    displayName: 'Select Infra'
+    type: string
+    values:
+      - 'Network'
+      - 'EC2'
 
 variables:
   - template: /pipeline/variables/variables.yml
@@ -117,7 +123,10 @@ stages:
               planTerraform: true
               applyTerraform: false
               destroyTerraform: false
-              workingDirectory: ${{ variables.defaultWorkingDirectory }}
+              ${{ if eq(parameters.InfraComponent, 'Network') }}:
+                workingDirectory: ${{ variables.networkWorkingDirectory }}
+              ${{ if eq(parameters.InfraComponent, 'EC2') }}:
+                workingDirectory: ${{ variables.ec2WorkingDirectory }}
               backendServiceAws: ${{ variables.serviceconnection }}
               providerAwsRegion: ${{ variables.cloudregion }}
               iacConfigFile: ${{ variables.iac_config_file }}

@@ -8,8 +8,6 @@ variables:
     value: my-aws-connection
   - name: cloudregion
     value: us-east-2
-  - name: defaultWorkingDirectory
-    value: pipeline/template/iac
   - ${{ if eq(parameters.env, 'dev') }}:
       - name: environment
         template: dev.yml
