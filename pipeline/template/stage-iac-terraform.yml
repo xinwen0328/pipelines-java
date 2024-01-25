@@ -28,10 +28,6 @@ parameters:
   - name: mytag1
     type: string
 
-variables:
-  - template: /pipeline/variables/variables.yml
-    parameters:
-      env: prd
 
 jobs:
   - job:
