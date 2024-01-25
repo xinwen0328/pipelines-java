@@ -31,7 +31,7 @@ pool:
   mypool
 
 stages:
-  - ${{ if eq(parameters.selectAction, "showTitle") }}:
+  - ${{ if eq(parameters.selectAction, 'showTitle') }}:
     - stage: showPipeline
       displayName: Show Pipeline
       jobs:
@@ -59,7 +59,7 @@ stages:
                 echo "I'm running pipeline from "${PWD}" on "${HOSTNAME}" for "${{ variables.region }}
                 echo "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<";
 
-  - ${{ if eq(parameters.selectAction, "installTerraform") }}:
+  - ${{ if eq(parameters.selectAction, 'installTerraform') }}:
     - stage: InstallTerraform
       displayName: Install Terraform
       jobs:
@@ -74,7 +74,7 @@ stages:
             backendServiceAws: ${{ variables.serviceconnection }}
             providerAwsRegion: ${{ variables.cloudregion }}
 
-  - ${{ if eq(parameters.selectAction, "planTerraform") }}:
+  - ${{ if eq(parameters.selectAction, 'planTerraform') }}:
       - stage: planTerraform
         displayName: Plan Terraform
         jobs:
@@ -93,7 +93,7 @@ stages:
               providerAwsRegion: ${{ variables.cloudregion }}
               iacConfigFile: ${{ variables.iac_config_file }}
 
-  - ${{ if eq(parameters.selectAction, "applyTerraform") }}:
+  - ${{ if eq(parameters.selectAction, 'applyTerraform') }}:
     - stage: applyTerraform
       displayName: Apply Terraform
       jobs:
@@ -112,7 +112,7 @@ stages:
             providerAwsRegion: ${{ variables.cloudregion }}
             iacConfigFile: ${{ variables.iac_config_file }}
 
-  - ${{ if parameters.destroyTerraform }}:
+  - ${{ if eq(parameters.selectAction, 'destroyTerraform') }}:
     - stage: destroyTerraform
       displayName: Destroy Terraform
       jobs:
