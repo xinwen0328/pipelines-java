@@ -28,7 +28,7 @@ parameters:
     displayName: Destroy Terraform
     type: boolean
     default: false
-  - Name: InfraComponent
+  - name: InfraComponent
     displayName: 'Select Infra'
     type: string
     values:
