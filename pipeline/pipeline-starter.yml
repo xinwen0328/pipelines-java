@@ -5,7 +5,7 @@
 
 parameters:
   - name: testPipeline
-    displayName: Test Your Running
+    displayName: Test Running
     type: boolean
     default: false
   - name: deployNetwork
