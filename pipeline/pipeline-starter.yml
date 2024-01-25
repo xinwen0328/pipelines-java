@@ -4,55 +4,37 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/java
 
 parameters:
-  - name: showTitle
-    displayName: show Title
-    type: boolean
-    default: true
-  - name: mavenBuild
-    displayName: maven Build
-    type: boolean
+  - name: deployNetwork
+    displayName: Deploy Network
     default: false
-  - name: installTerraform
-    displayName: install Terraform
-    type: boolean
-    default: false
-  - name: planTerraform
-    displayName: plan Terraform
-    type: boolean
-    default: false
-  - name: applyTerraform
-    displayName: apply Terraform
-    type: boolean
-    default: false
-  - name: destroyTerraform
-    displayName: Destroy Terraform
-    type: boolean
-    default: false
-  - name: InfraComponent
-    displayName: 'Select Infra'
+  - name: deployEC2
+    displayName: Deploy EC2
     type: string
+    default: false
+  - name: selectAction
+    displayName: Select your action
     values:
-      - 'Network'
-      - 'EC2'
+      - 'showTitle'
+      - 'installTerraform'
+      - 'planTerraform'
+      - 'applyTerraform'
+      - 'destroyTerraform'
 
 variables:
   - template: /pipeline/variables/variables.yml
     parameters:
       env: prd
 
-#trigger:
-#  - main
-
 pool:
   mypool
 
 stages:
-  - ${{ if parameters.showTitle  }}:
+  - ${{ if eq(parameters.selectAction, "showTitle") }}:
     - stage: showPipeline
       displayName: Show Pipeline
       jobs:
       - job: ShowPipelineInfo1
-        displayName: PipeLineInfo1
+        displayName: JOB #1 DEMO
         steps:
           - task: Bash@3
             displayName: Run Pipeline on ${{ variables.environment }} from ${{ variables.region }}
@@ -64,7 +46,7 @@ stages:
                 echo "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<";
 
       - job: ShowPipelineInfo2
-        displayName: PipeLineInfo2
+        displayName: JOB #1 DEMO
         steps:
           - task: Bash@3
             displayName: Run Pipeline on ${{ variables.environment }} from ${{ variables.region }}
@@ -75,29 +57,7 @@ stages:
                 echo "I'm running pipeline from "${PWD}" on "${HOSTNAME}" for "${{ variables.region }}
                 echo "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<";
 
-  - ${{ if parameters.mavenBuild }}:
-    - stage: mavenBuild
-      displayName: Maven Build
-      jobs:
-        - job: mavenJob
-          displayName: Maven Job
-          steps:
-            - task: MavenAuthenticate@0
-              inputs:
-                artifactsFeeds: xinwenliu
-
-            - task: Maven@3
-              inputs:
-                mavenPomFile: 'pom.xml'
-                mavenOptions: '-Xmx3072m'
-                javaHomeOption: 'JDKVersion'
-                jdkVersionOption: '1.8'
-                jdkArchitectureOption: 'x64'
-                publishJUnitResults: true
-                testResultsFiles: '**/surefire-reports/TEST-*.xml'
-                goals: 'package'
-
-  - ${{ if parameters.installTerraform }}:
+  - ${{ if eq(parameters.selectAction, "installTerraform") }}:
     - stage: InstallTerraform
       displayName: Install Terraform
       jobs:
@@ -112,7 +72,7 @@ stages:
             backendServiceAws: ${{ variables.serviceconnection }}
             providerAwsRegion: ${{ variables.cloudregion }}
 
-  - ${{ if parameters.planTerraform }}:
+  - ${{ if eq(parameters.selectAction, "planTerraform") }}:
       - stage: planTerraform
         displayName: Plan Terraform
         jobs:
@@ -123,15 +83,15 @@ stages:
               planTerraform: true
               applyTerraform: false
               destroyTerraform: false
-              ${{ if eq(parameters.InfraComponent, 'Network') }}:
+              ${{ if parameters.deployNetwork }}:
                 workingDirectory: ${{ variables.networkWorkingDirectory }}
-              ${{ if eq(parameters.InfraComponent, 'EC2') }}:
+              ${{ if parameters.deployEC2 }}:
                 workingDirectory: ${{ variables.ec2WorkingDirectory }}
               backendServiceAws: ${{ variables.serviceconnection }}
               providerAwsRegion: ${{ variables.cloudregion }}
               iacConfigFile: ${{ variables.iac_config_file }}
 
-  - ${{ if parameters.applyTerraform }}:
+  - ${{ if eq(parameters.selectAction, "applyTerraform") }}:
     - stage: applyTerraform
       displayName: Apply Terraform
       jobs:
@@ -142,7 +102,10 @@ stages:
             planTerraform: true
             applyTerraform: true
             destroyTerraform: false
-            workingDirectory: ${{ variables.defaultWorkingDirectory }}
+            ${{ if parameters.deployNetwork }}:
+              workingDirectory: ${{ variables.networkWorkingDirectory }}
+            ${{ if parameters.deployEC2 }}:
+              workingDirectory: ${{ variables.ec2WorkingDirectory }}
             backendServiceAws: ${{ variables.serviceconnection }}
             providerAwsRegion: ${{ variables.cloudregion }}
             iacConfigFile: ${{ variables.iac_config_file }}
@@ -158,7 +121,10 @@ stages:
             planTerraform: false
             applyTerraform: false
             destroyTerraform: true
-            workingDirectory: ${{ variables.defaultWorkingDirectory }}
+            ${{ if parameters.deployNetwork }}:
+              workingDirectory: ${{ variables.networkWorkingDirectory }}
+            ${{ if parameters.deployEC2 }}:
+              workingDirectory: ${{ variables.ec2WorkingDirectory }}
             backendServiceAws: ${{ variables.serviceconnection }}
             providerAwsRegion: ${{ variables.cloudregion }}
             iacConfigFile: ${{ variables.iac_config_file }}
