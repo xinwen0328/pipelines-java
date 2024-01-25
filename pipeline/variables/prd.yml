@@ -4,4 +4,4 @@ variables:
   - name: region
     value: china
   - name: mytag1
-    value: 我的牛13子网
+    value: "我的子网"
