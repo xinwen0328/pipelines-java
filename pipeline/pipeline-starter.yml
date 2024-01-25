@@ -4,6 +4,10 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/java
 
 parameters:
+  - name: testPipeline
+    displayName: Test Your Running
+    type: boolean
+    default: false
   - name: deployNetwork
     displayName: Deploy Network
     type: boolean
@@ -13,10 +17,9 @@ parameters:
     type: boolean
     default: false
   - name: selectAction
-    displayName: Select your action
+    displayName: Select your terraform action
     type: string
     values:
-      - 'showTitle'
       - 'installTerraform'
       - 'planTerraform'
       - 'applyTerraform'
@@ -31,7 +34,7 @@ pool:
   mypool
 
 stages:
-  - ${{ if eq(parameters.selectAction, 'showTitle') }}:
+  - ${{ if parameters.testPipeline }}:
     - stage: showPipeline
       displayName: Show Pipeline
       jobs:
