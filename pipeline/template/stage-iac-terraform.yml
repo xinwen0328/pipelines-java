@@ -63,7 +63,7 @@ jobs:
               workingDirectory: ${{ parameters.workingDirectory }}
               providerServiceAws: ${{ parameters.backendServiceAws }}
               providerAwsRegion: ${{ parameters.providerAwsRegion }}
-              secureVarsFile: "../iac_config/${{ parameters.iacConfigFile }}"
+              secureVarsFile: ${{ parameters.iacConfigFile }}
               # commandOptions: "-var-file=../iac_config/${{ parameters.iacConfigFile }}"
 
       - ${{ if parameters.applyTerraform }}:
@@ -74,7 +74,7 @@ jobs:
               workingDirectory: ${{ parameters.workingDirectory }}
               providerServiceAws: ${{ parameters.backendServiceAws }}
               providerAwsRegion: ${{ parameters.providerAwsRegion }}
-              secureVarsFile: "../iac_config/${{ parameters.iacConfigFile }}"
+              secureVarsFile: ${{ parameters.iacConfigFile }}
               #commandOptions: "-var-file=../iac_config/${{ parameters.iacConfigFile }}"
 
       - ${{ if parameters.destroyTerraform }}:
@@ -85,5 +85,5 @@ jobs:
               workingDirectory: ${{ parameters.workingDirectory }}
               providerServiceAws: ${{ parameters.backendServiceAws }}
               providerAwsRegion: ${{ parameters.providerAwsRegion }}
-              secureVarsFile: "../iac_config/${{ parameters.iacConfigFile }}"
+              secureVarsFile: ${{ parameters.iacConfigFile }}
               #commandOptions: "-var-file=../iac_config/${{ parameters.iacConfigFile }}"
