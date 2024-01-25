@@ -63,7 +63,7 @@ jobs:
               workingDirectory: ${{ parameters.workingDirectory }}
               providerServiceAws: ${{ parameters.backendServiceAws }}
               providerAwsRegion: ${{ parameters.providerAwsRegion }}
-              commandOptions: "-var-file=./iac_config/${{ parameters.iacConfigFile }}"
+              commandOptions: "-var-file=pipeline/template/iac_config/${{ parameters.iacConfigFile }}"
 
       - ${{ if parameters.applyTerraform }}:
           - task: TerraformCLI@0
@@ -73,7 +73,7 @@ jobs:
               workingDirectory: ${{ parameters.workingDirectory }}
               providerServiceAws: ${{ parameters.backendServiceAws }}
               providerAwsRegion: ${{ parameters.providerAwsRegion }}
-              commandOptions: "-var-file=./iac_config/${{ parameters.iacConfigFile }}"
+              commandOptions: "-var-file=pipeline/template/iac_config/${{ parameters.iacConfigFile }}"
 
       - ${{ if parameters.destroyTerraform }}:
           - task: TerraformCLI@0
@@ -83,4 +83,4 @@ jobs:
               workingDirectory: ${{ parameters.workingDirectory }}
               providerServiceAws: ${{ parameters.backendServiceAws }}
               providerAwsRegion: ${{ parameters.providerAwsRegion }}
-              commandOptions: "-var-file=./iac_config/${{ parameters.iacConfigFile }}"
+              commandOptions: "-var-file=pipeline/template/iac_config/${{ parameters.iacConfigFile }}"
