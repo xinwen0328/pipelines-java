@@ -120,6 +120,7 @@ stages:
               workingDirectory: ${{ variables.defaultWorkingDirectory }}
               backendServiceAws: ${{ variables.serviceconnection }}
               providerAwsRegion: ${{ variables.cloudregion }}
+              mytag1: ${{ variables.mytag1 }}
 
   - ${{ if parameters.applyTerraform }}:
     - stage: applyTerraform

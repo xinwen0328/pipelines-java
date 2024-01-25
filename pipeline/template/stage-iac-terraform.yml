@@ -25,6 +25,8 @@ parameters:
     type: string
   - name: providerAwsRegion
     type: string
+  - name: mytag1
+    type: string
 
 variables:
   - template: /pipeline/variables/variables.yml
