@@ -9,7 +9,7 @@ terraform {
 
   backend "s3" {
     bucket = "mysuppertfbackend"
-    key    = "mysuppertfbackend/dev-infrax"
+    key    = "mysuppertfbackend/dev-infraxEC2"
     region = "us-east-2"
   }
 }
