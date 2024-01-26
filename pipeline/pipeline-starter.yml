@@ -20,11 +20,11 @@ parameters:
     displayName: Select your terraform action
     type: string
     values:
-      - selectedAction
-      - installTerraform
-      - planTerraform
-      - applyTerraform
-      - destroyTerraform
+      - '--selectedAction--'
+      - 'installTerraform'
+      - 'planTerraform'
+      - 'applyTerraform'
+      - 'destroyTerraform'
 
 variables:
   - template: /pipeline/variables/variables.yml
