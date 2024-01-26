@@ -20,7 +20,7 @@ parameters:
     displayName: Select your terraform action
     type: string
     values:
-      - '--selectedAction--'
+      - 'selectedAction'
       - 'installTerraform'
       - 'planTerraform'
       - 'applyTerraform'
