@@ -12,3 +12,8 @@ variable "stage" {
   description = "My Stage"
   type        = string
 }
+
+variable "subnet_cidr_block" {
+  description = "My CIDR BLOCK"
+  type        = string
+}

@@ -12,3 +12,4 @@ variable "cidr_block" {
   description = "My CIDR BLOCK"
   type        = string
 }
+
