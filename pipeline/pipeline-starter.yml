@@ -27,9 +27,9 @@ parameters:
 variables:
   - template: /pipeline/variables/variables.yml
     parameters:
-      if ${{ eq(parameters.selectEnvironment, 'development') }}:
+      ${{ if eq(parameters.selectEnvironment, 'development') }}:
         env: dev
-      if ${{ eq(parameters.selectEnvironment, 'production') }}:
+      ${{ if eq(parameters.selectEnvironment, 'production') }}:
         env: prd
 
 pool:
