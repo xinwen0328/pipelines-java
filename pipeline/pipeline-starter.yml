@@ -93,6 +93,8 @@ stages:
                 workingDirectory: ${{ variables.networkWorkingDirectory }}
               ${{ if parameters.deployEC2 }}:
                 workingDirectory: ${{ variables.ec2WorkingDirectory }}
+              ${{ else }}:
+                workingDirectory: ${{ variables.defaultWorkingDirectory }}
               backendServiceAws: ${{ variables.serviceconnection }}
               providerAwsRegion: ${{ variables.cloudregion }}
               iacConfigFile: ${{ variables.iac_config_file }}
