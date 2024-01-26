@@ -5,3 +5,5 @@ variables:
     value: china
   - name: iac_config_file
     values: dev.tfvar
+  - name: iac_backend_file
+    value: devbackend.tf

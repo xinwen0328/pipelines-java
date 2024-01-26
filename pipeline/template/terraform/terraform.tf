@@ -7,9 +7,5 @@ terraform {
   }
   required_version = "~> 1.2"
 
-  backend "s3" {
-    bucket = "mysuppertfbackend"
-    key    = var.backendkey
-    region = "us-east-2"
-  }
+  backend "s3" {}
 }

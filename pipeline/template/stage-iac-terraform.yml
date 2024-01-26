@@ -27,6 +27,8 @@ parameters:
     type: string
   - name: iacConfigFile
     type: string
+  - name: iacBackendFile
+    type: string
 
 
 jobs:
@@ -54,6 +56,7 @@ jobs:
               # backendAwsBucket: mysuppertfbackend
               # s3 path to state file, optional if provided elsewhere (i.e. inside terraform template or command options)
               # backendAwsKey: mysuppertfbackend/dev-infrax
+              commandOptions: "-backend-config=./backend/${{ parameters.iacBackendFile }}"
 
       - ${{ if parameters.planTerraform }}:
           - task: TerraformCLI@0
@@ -64,7 +67,7 @@ jobs:
               providerServiceAws: ${{ parameters.backendServiceAws }}
               providerAwsRegion: ${{ parameters.providerAwsRegion }}
               #secureVarsFile: ${{ parameters.iacConfigFile }}
-              commandOptions: "-var-file=./config/${{ parameters.iacConfigFile }}"
+              commandOptions: "-var-file=./config/${{ parameters.iacConfigFile }} -backend-config=./backend/${{ parameters.iacBackendFile }}"
 
       - ${{ if parameters.applyTerraform }}:
           - task: TerraformCLI@0
@@ -75,7 +78,7 @@ jobs:
               providerServiceAws: ${{ parameters.backendServiceAws }}
               providerAwsRegion: ${{ parameters.providerAwsRegion }}
               #secureVarsFile: ${{ parameters.iacConfigFile }}
-              commandOptions: "-var-file=./config/${{ parameters.iacConfigFile }}"
+              commandOptions: "-var-file=./config/${{ parameters.iacConfigFile }} -backend-config=./backend/${{ parameters.iacBackendFile }}"
 
       - ${{ if parameters.destroyTerraform }}:
           - task: TerraformCLI@0
@@ -86,4 +89,4 @@ jobs:
               providerServiceAws: ${{ parameters.backendServiceAws }}
               providerAwsRegion: ${{ parameters.providerAwsRegion }}
               #secureVarsFile: ${{ parameters.iacConfigFile }}
-              commandOptions: "-var-file=./config/${{ parameters.iacConfigFile }}"
+              commandOptions: "-var-file=./config/${{ parameters.iacConfigFile }} -backend-config=./backend/${{ parameters.iacBackendFile }}"

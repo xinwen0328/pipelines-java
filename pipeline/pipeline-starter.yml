@@ -79,6 +79,7 @@ stages:
             backendServiceAws: ${{ variables.serviceconnection }}
             providerAwsRegion: ${{ variables.cloudregion }}
             iacConfigFile: ''
+            iacBackendFile: ${{ variables.iac_backend_file }}
 
   - ${{ if eq(parameters.selectAction, 'planTerraform') }}:
       - stage: planTerraform
@@ -95,6 +96,7 @@ stages:
               backendServiceAws: ${{ variables.serviceconnection }}
               providerAwsRegion: ${{ variables.cloudregion }}
               iacConfigFile: ${{ variables.iac_config_file }}
+              iacBackendFile: ${{ variables.iac_backend_file }}
 
   - ${{ if eq(parameters.selectAction, 'applyTerraform') }}:
     - stage: applyTerraform
@@ -111,6 +113,7 @@ stages:
             backendServiceAws: ${{ variables.serviceconnection }}
             providerAwsRegion: ${{ variables.cloudregion }}
             iacConfigFile: ${{ variables.iac_config_file }}
+            iacBackendFile: ${{ variables.iac_backend_file }}
 
   - ${{ if eq(parameters.selectAction, 'destroyTerraform') }}:
     - stage: destroyTerraform
@@ -127,6 +130,7 @@ stages:
             backendServiceAws: ${{ variables.serviceconnection }}
             providerAwsRegion: ${{ variables.cloudregion }}
             iacConfigFile: ${{ variables.iac_config_file }}
+            iacBackendFile: ${{ variables.iac_backend_file }}
 
 
 
