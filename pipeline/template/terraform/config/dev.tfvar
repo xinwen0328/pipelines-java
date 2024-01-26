@@ -1,3 +1,4 @@
 stage = "Development"
 vpc_name = "VPC_FOR_DEV"
 subnet_name = "SubNet_FOR_DEV"
+cidr_block = "10.0.0.1/16"
