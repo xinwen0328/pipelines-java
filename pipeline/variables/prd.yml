@@ -5,9 +5,3 @@ variables:
     value: china
   - name: iac_config_file
     value: prd.tfvar
-  - name: defaultWorkingDirectory
-    value: pipeline/template
-  - name: networkWorkingDirectory
-    value: pipeline/template/network
-  - name: ec2WorkingDirectory
-    value: pipeline/template/ec2

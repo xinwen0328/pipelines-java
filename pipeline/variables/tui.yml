@@ -1,7 +1,0 @@
-variables:
-  - name: environment
-    value: tui
-  - name: region
-    value: china
-  - name: iac_config_file
-    values: tui.tfvar

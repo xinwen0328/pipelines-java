@@ -13,8 +13,5 @@ variables:
   - ${{ if eq(parameters.env, 'dev') }}:
       - name: environment
         template: dev.yml
-  - ${{ if eq(parameters.env, 'tui') }}:
-      - name: environment
-        template: tui.yml
   - ${{ if eq(parameters.env, 'prd') }}:
       - template: prd.yml
