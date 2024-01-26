@@ -5,7 +5,7 @@ resource "aws_subnet" "my_subnet" {
   map_public_ip_on_launch = true            # 设置为 true 表示子网中的实例将自动分配公共 IP 地址
 
   tags = {
-    Name = "my-subnet"
+    Name = var.subnet_name
     NickName = var.stage
   }
 }

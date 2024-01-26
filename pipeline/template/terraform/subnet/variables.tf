@@ -3,6 +3,11 @@ variable "vpc_id" {
   type        = string
 }
 
+variable "subnet_name" {
+  description = "My Subnet name"
+  type        = string
+}
+
 variable "stage" {
   description = "My Stage"
   type        = string
