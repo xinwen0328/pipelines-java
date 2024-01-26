@@ -94,7 +94,7 @@ stages:
                 workingDirectory: ${{ variables.networkWorkingDirectory }}
               ${{ if parameters.deployEC2 }}:
                 workingDirectory: ${{ variables.ec2WorkingDirectory }}
-              ${{ if and(not(parameters.deployEC2), not(parameters.deployNetwork)  }}:
+              ${{ if and(not(parameters.deployEC2), not(parameters.deployNetwork))  }}:
                 workingDirectory: ${{ variables.defaultWorkingDirectory }}
               backendServiceAws: ${{ variables.serviceconnection }}
               providerAwsRegion: ${{ variables.cloudregion }}
@@ -115,7 +115,7 @@ stages:
               workingDirectory: ${{ variables.networkWorkingDirectory }}
             ${{ if parameters.deployEC2 }}:
               workingDirectory: ${{ variables.ec2WorkingDirectory }}
-            ${{ if and(not(parameters.deployEC2), not(parameters.deployNetwork)  }}:
+            ${{ if and(not(parameters.deployEC2), not(parameters.deployNetwork))  }}:
               workingDirectory: ${{ variables.defaultWorkingDirectory }}
             backendServiceAws: ${{ variables.serviceconnection }}
             providerAwsRegion: ${{ variables.cloudregion }}
@@ -136,7 +136,7 @@ stages:
               workingDirectory: ${{ variables.networkWorkingDirectory }}
             ${{ if parameters.deployEC2 }}:
               workingDirectory: ${{ variables.ec2WorkingDirectory }}
-            ${{ if and(not(parameters.deployEC2), not(parameters.deployNetwork)  }}:
+            ${{ if and(not(parameters.deployEC2), not(parameters.deployNetwork))  }}:
               workingDirectory: ${{ variables.defaultWorkingDirectory }}
             backendServiceAws: ${{ variables.serviceconnection }}
             providerAwsRegion: ${{ variables.cloudregion }}
