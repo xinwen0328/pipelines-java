@@ -3,14 +3,14 @@ provider "aws" {
 }
 
 module "vpc" {
-  source  = "./vpc"
+  source  = "vpc"
   stage = var.stage
 }
 
 
 
 module "subnet" {
-  source  = "./subnet"
+  source  = "subnet"
   vpc_id = module.vpc.vpc_id
   stage = var.stage
 }

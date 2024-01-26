@@ -9,7 +9,7 @@ variables:
   - name: cloudregion
     value: us-east-2
   - name: defaultWorkingDirectory
-    value: pipeline/template
+    value: pipeline/template/terraform
   - ${{ if eq(parameters.env, 'dev') }}:
       - name: environment
         template: dev.yml
