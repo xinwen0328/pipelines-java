@@ -77,6 +77,7 @@ stages:
             backendServiceAws: ${{ variables.serviceconnection }}
             providerAwsRegion: ${{ variables.cloudregion }}
 
+
   - ${{ if eq(parameters.selectAction, 'planTerraform') }}:
       - stage: planTerraform
         displayName: Plan Terraform
