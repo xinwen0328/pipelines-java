@@ -6,4 +6,4 @@ variables:
   - name: iac_config_file
     value: dev.tfvar
   - name: iac_backend_file
-    value: devbackend.conf
+    value: dev.tfvar
