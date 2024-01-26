@@ -77,7 +77,7 @@ stages:
             workingDirectory: ${{ variables.defaultWorkingDirectory }}
             backendServiceAws: ${{ variables.serviceconnection }}
             providerAwsRegion: ${{ variables.cloudregion }}
-
+            iacConfigFile: ''
 
   - ${{ if eq(parameters.selectAction, 'planTerraform') }}:
       - stage: planTerraform
