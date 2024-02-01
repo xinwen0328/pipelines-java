@@ -4,3 +4,11 @@
     name:
       - ansible
     state: present
+
+- name: Copy vsts to root
+  copy:
+    src: vsts-agent-linux-x64-3.232.3.tar.gz
+    dest: /root/vsts-agent-linux-x64-3.232.3.tar.gz
+
+- name: Install build agent
+  shell: configBuildAgent.sh
