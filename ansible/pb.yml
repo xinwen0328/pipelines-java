@@ -1,3 +1,4 @@
+---
 - hosts: all
   gather_facts: no
   become: no
@@ -5,9 +6,9 @@
     - vars.yml
   roles:
     - aws_ec2
+    - ado_agent
   module_defaults:
     group/aws:
       aws_access_key: '{{ aws_access_key }}'
       aws_secret_key: '{{ aws_secret_key }}'
       region: '{{ region }}'
-  tags: aws

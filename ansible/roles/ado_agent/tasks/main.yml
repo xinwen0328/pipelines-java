@@ -1,8 +1,24 @@
 ---
-- name: Include Build Agent  tasks
+- name: APT Install
   include_tasks:
-    file: build_agent.yml
+    file: aptinstall.yml
     apply:
-      tags: build
-  tags: build
+      tags: aptinstall
+  tags: aptinstall
+
+
+- name: Copy VSTS
+  include_tasks:
+    file: copyvsts.yml
+    apply:
+      tags: copyvsts
+  tags: copyvsts
+
+
+- name: configure Build Agent
+  include_tasks:
+    file: installbuildagent.yml
+    apply:
+      tags: ba
+  tags: ba
 

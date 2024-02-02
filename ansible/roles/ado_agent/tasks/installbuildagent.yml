@@ -1,0 +1,13 @@
+- name: Copy script to ubuntu
+  copy:
+    src: configBuildAgent.sh
+    dest: ~/configBuildAgent.sh
+
+
+- name: Install/Start build agent
+  command: sh ~/configBuildAgent.sh
+  register: result
+
+- name: Display Registered Output
+  debug:
+    var: result

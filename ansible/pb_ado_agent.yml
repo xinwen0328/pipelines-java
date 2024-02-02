@@ -1,7 +1,6 @@
 ---
-- hosts: 18.216.165.2
-  gather_facts: no
-  become: yes
+- hosts: all
+  gather_facts: yes
+  become: no
   roles:
     - ado_agent
-  tags: agent

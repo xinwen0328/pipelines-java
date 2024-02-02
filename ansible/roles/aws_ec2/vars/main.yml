@@ -1,5 +1,2 @@
 ---
-aws_access_key: ""
-aws_secret_key: ""
-region: "us-east-2"
-aws_instance_id: "i-0358082a7d3691d44"
+aws_instance_id: "i-0a2881daf62ccfe3c"

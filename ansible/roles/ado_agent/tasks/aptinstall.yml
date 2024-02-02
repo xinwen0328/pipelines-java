@@ -1,0 +1,13 @@
+---
+- name: APT update
+  become: yes
+  apt:
+    update-cache: yes
+
+
+- name: Install necessary packages
+  become: yes
+  apt:  # zu yum ändern
+    name:
+      - squid
+    state: present
