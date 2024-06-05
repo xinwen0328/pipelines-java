@@ -11,8 +11,8 @@ ansible-playbook pb.yml -i hosts.yml -l  18.223.44.80 --tags copyvsts
 
 
 #####
-var1: "AKIA5VXNSAFOZBPWBCUH"
+var1: ""
 
-var2: "mPPpK37uziB0tyyYhso32/MLtyqCZXGYnROEsAmx"
+var2: ""
 
 var3: "us-east-2"
